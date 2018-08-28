@@ -70,12 +70,10 @@ let withdrawMoney = (req, res) => {
             data.counttwo = 0;
             data.countfive = 0;
             data.new_balance = 0;
-            data.message = "";
             console.log("this is result", result[0])
             if (result[0].balance >= req.body.amount) {
                 let value = req.body.amount;
                 console.log(req.body.amount)
-                if(req.body.amount >=100 ){
                     let remainder = value % 100;
                     if (remainder == 0) {
                         while (value > 0) {
@@ -109,20 +107,16 @@ let withdrawMoney = (req, res) => {
                         });
                     }
                     else {
-                        data.message = "Please Enter Amount Multiple of 100"
+                        let apiResponse1 = response.generate(false, 'Please Enter Amount Multiple of 100', 400, null)
+                            res.send(apiResponse1)
                     }
-                }
-                else{
-                    res.send({"message":"Please Enter Amount Multiple of 100"})
-                }
 
-                res.send({"status":200, data:data});
+                    let apiResponse2 = response.generate(false, 'Transaction Successful', 200, data)
+                    res.send(apiResponse2)
             }
             else {
-                res.send({
-                    "status": 400,
-                    "message": "Not Sufficient Balance"
-                })
+                let apiResponse3 = response.generate(false, 'Insufficient Balance', 400, null)
+                    res.send(apiResponse3)
             }
         }
     });
