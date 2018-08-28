@@ -13,7 +13,7 @@ let createTransaction = (req, res) => {
     var newTransaction = new TransactionsModel({
 
         card_number: req.body.card_number,
-        debit: req.body.bedit,
+        debit: req.body.debit,
         balance: req.body.balance
     });
 

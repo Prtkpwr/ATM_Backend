@@ -9,10 +9,10 @@ let transactionSchema = new Schema({
 card_number: {
     type: String,
     default:'',
-    unique:true
+    unique:false
 },
 debit: {
-    type: Number,
+    type: String,
     default:'',
     unique:false
 },

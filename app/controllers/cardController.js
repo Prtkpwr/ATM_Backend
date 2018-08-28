@@ -74,49 +74,50 @@ let withdrawMoney = (req, res) => {
             if (result[0].balance >= req.body.amount) {
                 let value = req.body.amount;
                 console.log(req.body.amount)
-                    let remainder = value % 100;
-                    if (remainder == 0) {
-                        while (value > 0) {
-                            if ((value / 2000) >= 1) {
-                                data.counttwo += Math.floor(value / 2000)
-                                value = value - Math.floor(value / 2000) * 2000
-                            }
-                            else if ((value / 500) >= 1) {
-                                data.countfive += Math.floor(value / 500)
-                                value = value - Math.floor(value / 500) * 500
-                            }
-                            else if ((value / 100) >= 1) {
-                                data.countone += Math.floor(value / 100)
-                                value = value - Math.floor(value / 100) * 100
-                            }
+                let remainder = value % 100;
+                if (remainder == 0) {
+                    while (value > 0) {
+                        if ((value / 2000) >= 1) {
+                            data.counttwo += Math.floor(value / 2000)
+                            value = value - Math.floor(value / 2000) * 2000
                         }
-                        data.new_balance = result[0].balance - req.body.amount
-                        let update = {
-                            balance: data.new_balance
+                        else if ((value / 500) >= 1) {
+                            data.countfive += Math.floor(value / 500)
+                            value = value - Math.floor(value / 500) * 500
                         }
-                        CardsModel.findOneAndUpdate({
-                            "card_number": req.body.card_number
-                        }, update, function (err, result) {
-    
-                            if (err) {
-                                console.log(err)
-                            } else {
-                                console.log("done")
-                            }
-    
-                        });
+                        else if ((value / 100) >= 1) {
+                            data.countone += Math.floor(value / 100)
+                            value = value - Math.floor(value / 100) * 100
+                        }
                     }
-                    else {
-                        let apiResponse1 = response.generate(false, 'Please Enter Amount Multiple of 100', 400, null)
-                            res.send(apiResponse1)
-                    }
-
+                    data.new_balance = result[0].balance - req.body.amount
                     let apiResponse2 = response.generate(false, 'Transaction Successful', 200, data)
                     res.send(apiResponse2)
+                    let update = {
+                        balance: data.new_balance
+                    }
+                    CardsModel.findOneAndUpdate({
+                        "card_number": req.body.card_number
+                    }, update, function (err, result) {
+
+                        if (err) {
+                            console.log(err)
+                        } else {
+                            console.log("done")
+                        }
+
+                    });
+                }
+                else {
+                    let apiResponse1 = response.generate(false, 'Please Enter Amount Multiple of 100', 400, null)
+                    res.send(apiResponse1)
+                }
+
             }
             else {
+
                 let apiResponse3 = response.generate(false, 'Insufficient Balance', 400, null)
-                    res.send(apiResponse3)
+                res.send(apiResponse3)
             }
         }
     });
