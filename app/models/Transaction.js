@@ -20,7 +20,11 @@ balance: {
     type: Number,
     default:'',
     unique:false
-}
+},
+createdOn :{
+    type:Date,
+    default:Date.now
+  }
 });
 
 

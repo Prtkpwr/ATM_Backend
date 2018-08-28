@@ -1,10 +1,10 @@
 let appConfig = {};
 
-appConfig.port = 3001;
+appConfig.port = 3000;
 appConfig.allowedCorsOrigin = "*";
 appConfig.env = "dev";
 appConfig.db = {
-    uri: 'mongodb://127.0.0.1:27017/systemDB'
+    uri: 'mongodb://test:test@ds143778.mlab.com:43778/greenmart'
   }
 appConfig.apiVersion = '/api/v1';
 
