@@ -12,5 +12,5 @@ module.exports.setRouter = (app) => {
     app.put(`${baseUrl}/edit`, cardController.editCard);
     app.post(`${baseUrl}/validate`, cardController.CardValidateAndLogin);
     app.post(`${baseUrl}/check_balance`, cardController.checkCardBalance);
-
+    app.post(`${baseUrl}/withdraw`, cardController.withdrawMoney);
 }
