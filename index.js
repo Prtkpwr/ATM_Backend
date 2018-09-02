@@ -64,16 +64,12 @@ app.use(globalErrorMiddleware.globalNotFoundHandler);
  * Create HTTP server.
  */
 
-// const server = http.createServer(app);
-// // start listening to http server
-// console.log(appConfig);
-// server.listen(appConfig.port);
-// server.on('error', onError);
-// server.on('listening', onListening);
-var server = app.listen(process.env.PORT || 3000, function () {
-  var port = server.address().port;
-  console.log("App now running on port", port);
-});
+const server = http.createServer(app);
+// start listening to http server
+console.log(appConfig);
+server.listen(appConfig.port);
+server.on('error', onError);
+server.on('listening', onListening);
 
 // end server listening code
 
